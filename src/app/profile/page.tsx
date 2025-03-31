@@ -1,4 +1,19 @@
-export default function Profile() {
+import { Button } from '@/components/ui/button'
+import LogoutButton from '@/components/ui/logoutButton'
+import { createClient } from '@/lib/utils/supabase/server'
+import { redirect } from 'next/navigation'
+
+export default async function Profile() {
+  const supabase = await createClient()
+  
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    return redirect('/signin') // 🔐 redirection si non connecté
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
       <div className="flex items-center space-x-6">
@@ -15,9 +30,7 @@ export default function Profile() {
             <a href="#" className="text-blue-500 hover:underline">
               Modifier le Profil
             </a>
-            <a href="#" className="text-blue-500 hover:underline">
-              Connexion
-            </a>
+            <LogoutButton />
           </div>
         </div>
       </div>
