@@ -1,7 +1,17 @@
+"use client";
+
 import Image from "next/image";
-import Button from "@/components/ui/button";
 import { userService } from "@/services/userService";
-import UserCard from "@/components/UserCard";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { useRouter } from "next/navigation";
 
 // Déclaration du type pour l'utilisateur
 interface User {
@@ -14,6 +24,7 @@ interface User {
 export default function Home() {
   // Typage de la variable users
   const users: User[] = userService.getUsers(5);
+  const router = useRouter();
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -26,50 +37,35 @@ export default function Home() {
           height={38}
           priority
         />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-        <Button>Click me</Button>
-        <div className="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {users.map((user) => (
-            <UserCard key={user.id} {...user} />
-          ))}
-        </div>
+        <Table>
+          <TableCaption>Liste des utilisateurs.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[100px]">Nom</TableHead>
+              <TableHead>Prénom</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead className="text-right">Montant</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {users.map((user) => (
+              <TableRow
+                key={user.id}
+                onClick={() => router.push(`/users/${user.id}`)}
+                className="cursor-pointer hover:bg-gray-100 transition"
+              >
+                <TableCell className="font-medium">
+                  {user.name.split(" ")[1]}
+                </TableCell>
+                <TableCell>{user.name.split(" ")[0]}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell className="text-right">
+                  ${(Math.random() * 1000).toFixed(2)}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
