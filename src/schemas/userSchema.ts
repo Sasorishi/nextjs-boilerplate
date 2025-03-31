@@ -8,14 +8,6 @@ export const userSchema = z.object({
   avatar: z.string().url(), // avatar doit être une URL valide
 });
 
-// Type pour un utilisateur
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  avatar: string;
-}
-
 // Validation des données utilisateur
 export const validateUser = (data: unknown) => {
   return userSchema.safeParse(data); // `safeParse` renvoie un résultat avec succès ou erreur

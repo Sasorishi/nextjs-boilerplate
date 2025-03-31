@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { userService } from "@/services/userService";
+import { User as UserInterface } from "@/types/user";
 import {
   Table,
   TableBody,
@@ -13,17 +14,9 @@ import {
 } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
 
-// Déclaration du type pour l'utilisateur
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  // Ajoute d'autres propriétés selon ce qui est nécessaire
-}
-
 export default function Home() {
   // Typage de la variable users
-  const users: User[] = userService.getUsers(5);
+  const users: UserInterface[] = userService.getUsers(5);
   const router = useRouter();
 
   return (

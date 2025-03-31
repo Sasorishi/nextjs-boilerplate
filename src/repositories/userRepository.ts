@@ -1,14 +1,12 @@
 import { faker } from "@faker-js/faker";
+import { User } from "@/types/user";
 
-// Définition du type pour un utilisateur
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  avatar: string;
+// Interface UserRepository pour définir la signature des méthodes
+export interface IUserRepository {
+  getUsers(count: number): User[]; // Typage de la méthode getUsers
 }
 
-class UserRepository {
+class UserRepository implements IUserRepository {
   // Typage de la méthode getUsers pour renvoyer un tableau d'utilisateurs
   getUsers(count: number): User[] {
     return Array.from({ length: count }, () => ({

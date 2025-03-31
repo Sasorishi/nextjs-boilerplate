@@ -1,23 +1,23 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { loginUser } from '@/services/authService'
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { loginUser } from "@/services/authService";
 
 export default function LoginPage() {
-  const router = useRouter()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState<string | null>(null)
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async () => {
-    const { data, error } = await loginUser(email, password)
+    const { data, error } = await loginUser(email, password);
     if (error) {
-      setError(error.message)
+      setError(error.message);
     } else {
-      router.push('/profile')
+      router.push("/profile");
     }
-  }
+  };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-4 border rounded">
@@ -48,8 +48,11 @@ export default function LoginPage() {
       </button>
 
       <p className="text-center text-sm mt-4">
-        Pas encore de compte ? <a href="/signup" className="text-blue-600 underline">Créer un compte</a>
+        Pas encore de compte ?{" "}
+        <a href="/signup" className="text-blue-600 underline">
+          Créer un compte
+        </a>
       </p>
     </div>
-  )
+  );
 }
