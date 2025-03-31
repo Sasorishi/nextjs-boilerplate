@@ -1,12 +1,18 @@
 import { userRepository } from "@/repositories/userRepository";
 import { validateUser } from "@/schemas/userSchema";
 
+interface UserRepository {
+  getUsers(count: number): User[]; // Typage de la méthode getUsers du repository
+}
+
 class UserService {
-  constructor(repository) {
+  private repository: UserRepository;
+
+  constructor(repository: UserRepository) {
     this.repository = repository;
   }
 
-  getUsers(count) {
+  getUsers(count: number): User[] {
     const users = this.repository.getUsers(count);
 
     // Validation des utilisateurs avec Zod
@@ -20,7 +26,7 @@ class UserService {
         }
         return user;
       })
-      .filter(Boolean); // On retire les utilisateurs invalides
+      .filter(Boolean) as User[]; // On retire les utilisateurs invalides et on type le retour
   }
 }
 
