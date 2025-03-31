@@ -1,10 +1,19 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/button";
 import { userService } from "@/services/userService";
 import UserCard from "@/components/UserCard";
 
+// Déclaration du type pour l'utilisateur
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  // Ajoute d'autres propriétés selon ce qui est nécessaire
+}
+
 export default function Home() {
-  const users = userService.getUsers(5);
+  // Typage de la variable users
+  const users: User[] = userService.getUsers(5);
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
