@@ -1,21 +1,21 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { createFakeUser } from '@/services/createFakeUserService'
+import { useState } from "react";
+import { createFakeUser } from "@/services/createFakeUserService";
 
 export default function FakerPage() {
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState("");
 
   const handleCreateFakeUser = async () => {
-    setStatus('Création en cours...')
-    const user = await createFakeUser()
+    setStatus("Création en cours...");
+    const user = await createFakeUser();
 
     if (user) {
-      setStatus(`✅ Utilisateur créé : ${user.email} / ${user.password}`)
+      setStatus(`✅ Utilisateur créé : ${user.email} / ${user.password}`);
     } else {
-      setStatus('❌ Échec de la création')
+      setStatus("❌ Échec de la création");
     }
-  }
+  };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-4 border rounded">
@@ -30,5 +30,5 @@ export default function FakerPage() {
 
       {status && <p className="text-sm text-gray-700">{status}</p>}
     </div>
-  )
+  );
 }
