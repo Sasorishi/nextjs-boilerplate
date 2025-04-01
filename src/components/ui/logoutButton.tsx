@@ -1,7 +1,7 @@
-'use client'
-import { logoutUser } from '@/services/auth/logoutService'
-import { useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button' // adapte ce chemin si nécessaire
+"use client";
+import { logoutUser } from "@/services/auth/logoutService";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button"; // adapte ce chemin si nécessaire
 
 export default function LogoutButton() {
   const router = useRouter();
