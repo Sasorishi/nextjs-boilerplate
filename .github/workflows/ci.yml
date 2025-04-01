@@ -34,7 +34,7 @@ jobs:
   lint:
     name: 🎨 Lint & Format
     runs-on: ubuntu-latest
-    needs: setup # Attendre que setup soit terminé
+    needs: setup
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -54,7 +54,7 @@ jobs:
   build:
     name: 🏗️ Build Project
     runs-on: ubuntu-latest
-    needs: lint # Attendre que lint soit terminé
+    needs: lint
     env:
       NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
@@ -74,7 +74,7 @@ jobs:
   test:
     name: ✅ Run Tests
     runs-on: ubuntu-latest
-    needs: build # Attendre que build soit terminé
+    needs: build
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
