@@ -21,7 +21,9 @@ describe("registerUser", () => {
 
     const result = await registerUser("test@example.com", "password123");
 
-    expect(result.data).toEqual({ user: { id: "123", email: "test@example.com" } });
+    expect(result.data).toEqual({
+      user: { id: "123", email: "test@example.com" },
+    });
     expect(result.error).toBeNull();
     expect(mockedSupabase.auth.signUp).toHaveBeenCalledWith({
       email: "test@example.com",
