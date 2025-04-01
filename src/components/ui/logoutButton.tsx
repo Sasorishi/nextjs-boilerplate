@@ -1,5 +1,5 @@
 "use client";
-import { logoutUser } from "@/services/authService";
+import { logoutUser } from "@/services/auth/logoutService";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button"; // adapte ce chemin si nécessaire
 
