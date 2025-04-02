@@ -17,7 +17,9 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json([user]);
   } catch (error: any) {
     console.error("❌ Erreur dans POST /api/users :", error);
-    return new NextResponse(`Erreur serveur : ${error.message}`, { status: 500 });
+    return new NextResponse(`Erreur serveur : ${error.message}`, {
+      status: 500,
+    });
   }
 };
 
@@ -28,8 +30,14 @@ export const GET = async () => {
     const { data, error } = await supabase.from("client").select("*");
 
     if (error) {
-      console.error("Erreur lors de la récupération des clients :", error.message);
-      return new NextResponse(`Erreur récupération clients : ${error.message}`, { status: 500 });
+      console.error(
+        "Erreur lors de la récupération des clients :",
+        error.message,
+      );
+      return new NextResponse(
+        `Erreur récupération clients : ${error.message}`,
+        { status: 500 },
+      );
     }
 
     return NextResponse.json(data);

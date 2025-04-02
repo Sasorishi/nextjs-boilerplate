@@ -5,7 +5,7 @@ import { DrizzleClientRepository } from "@/repositories/drizzleRepository";
 export class RegisterClientService {
   constructor(
     private repository: DrizzleClientRepository,
-    private authService: IAuthService
+    private authService: IAuthService,
   ) {}
 
   async execute() {
@@ -17,7 +17,11 @@ export class RegisterClientService {
     const last_name = faker.person.lastName();
     const display_name = `${first_name} ${last_name}`;
 
-    const authResult = await this.authService.register(email, password, display_name);
+    const authResult = await this.authService.register(
+      email,
+      password,
+      display_name,
+    );
     console.log("🧪 Résultat register Supabase Auth:", authResult);
 
     if (!authResult?.id) {
@@ -31,7 +35,10 @@ export class RegisterClientService {
       password,
       first_name,
       last_name,
-      goal: faker.helpers.arrayElement(["Perdre du poids", "Prendre du muscle"]),
+      goal: faker.helpers.arrayElement([
+        "Perdre du poids",
+        "Prendre du muscle",
+      ]),
       height: faker.number.float({ min: 1.5, max: 2.0 }).toFixed(2),
       weight: faker.number.float({ min: 50, max: 100 }).toFixed(1),
       allergies: "",

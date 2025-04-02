@@ -1,3 +1,3 @@
 export interface IClientRepository {
-    insert(client: any): Promise<boolean>;
-  }
+  insert(client: any): Promise<boolean>;
+}

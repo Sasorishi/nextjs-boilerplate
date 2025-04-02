@@ -25,7 +25,9 @@ export default function FakerPage() {
 
       if (users?.length > 0) {
         const user = users[0];
-        setStatus(`✅ Utilisateur créé : ${user.email}${user.password ? " / " + user.password : ""}`);
+        setStatus(
+          `✅ Utilisateur créé : ${user.email}${user.password ? " / " + user.password : ""}`,
+        );
       } else {
         setStatus("❌ Aucun utilisateur créé");
       }

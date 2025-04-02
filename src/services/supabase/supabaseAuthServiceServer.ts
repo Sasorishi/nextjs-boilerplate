@@ -2,7 +2,11 @@ import { createClient } from "@/lib/utils/supabase/server";
 import { IAuthService } from "@/services/auth/authService";
 
 export class SupabaseAuthServiceServer implements IAuthService {
-  async register(email: string, password: string, displayName?: string): Promise<{ id: string } | null> {
+  async register(
+    email: string,
+    password: string,
+    displayName?: string,
+  ): Promise<{ id: string } | null> {
     const supabase = await createClient();
 
     const { data, error } = await supabase.auth.signUp({
