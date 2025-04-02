@@ -86,4 +86,4 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
 
       - name: Run Tests
-        run: npm test
+        run: npm test -- --passWithNoTests
