@@ -1,7 +1,7 @@
-import { SupabaseAuthServiceClient } from "@/services/supabase/supabaseAuthServiceClient";
+import { SupabaseAuthServiceServer } from "@/services/supabase/supabaseLoginService";
 import { ILoginService } from "./authService";
 
-const authService = new SupabaseAuthServiceClient();
+const authService = new SupabaseAuthServiceServer();
 
 export class LoginService implements ILoginService {
   async login(email: string, password: string) {

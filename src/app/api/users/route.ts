@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { RegisterClientService } from "@/services/client/clientRegisterService";
 import { DrizzleClientRepository } from "@/repositories/drizzleRepository";
 import { createClient } from "@/lib/utils/supabase/server";
-import { SupabaseAuthServiceServer } from "@/services/supabase/supabaseAuthServiceServer";
+import { SupabaseAuthServiceServer } from "@/services/supabase/supabaseRegisterService";
 
 export const POST = async (req: NextRequest) => {
   try {

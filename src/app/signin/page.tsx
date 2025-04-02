@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { LoginService } from "@/services/auth/loginService";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,12 +10,22 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async () => {
-    const loginService = new LoginService();
-    const { data, error } = await loginService.login(email, password);
-    if (error) {
-      setError(error.message);
-    } else {
-      router.push("/profile");
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        setError(result.error || "Erreur de connexion");
+      } else {
+        router.push("/profile");
+      }
+    } catch (err: any) {
+      setError("Erreur réseau");
     }
   };
 
