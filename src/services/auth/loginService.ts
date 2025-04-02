@@ -1,10 +1,10 @@
-import { supabase } from "@/lib/utils/supabase/client";
+import { SupabaseAuthServiceClient } from "@/services/supabase/supabaseAuthServiceClient";
+import { ILoginService } from "./authService";
 
-export async function loginUser(email: string, password: string) {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
+const authService = new SupabaseAuthServiceClient();
 
-  return { data, error };
+export class LoginService implements ILoginService {
+  async login(email: string, password: string) {
+    return await authService.login(email, password);
+  }
 }

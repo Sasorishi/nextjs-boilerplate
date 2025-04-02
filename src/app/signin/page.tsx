@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { loginUser } from "@/services/auth/loginService";
+import { LoginService } from "@/services/auth/loginService";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,7 +11,8 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async () => {
-    const { data, error } = await loginUser(email, password);
+    const loginService = new LoginService();
+    const { data, error } = await loginService.login(email, password);
     if (error) {
       setError(error.message);
     } else {
