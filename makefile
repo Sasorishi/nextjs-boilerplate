@@ -3,6 +3,7 @@
 # Variables
 IMAGE_NAME = nextjs-app
 CONTAINER_NAME = nextjs-container
+DOCKER_COMPOSE = docker-compose
 PORT = 3000
 
 # 🔨 Build Docker image
@@ -11,11 +12,16 @@ build:
 
 # 🚀 Run container
 up:
-	docker run -d --rm -p $(PORT):3000 --name $(CONTAINER_NAME) $(IMAGE_NAME)
+	$(DOCKER_COMPOSE) up -d
 
 # 🛑 Stop container
-stop:
-	docker stop $(CONTAINER_NAME)
+down:
+	$(DOCKER_COMPOSE) down
+
+delete containers:
+	$(DOCKER_COMPOSE) down --volumes
+
+restart: down up
 
 # 🧹 Clean everything
 clean:
