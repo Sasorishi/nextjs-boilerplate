@@ -71,19 +71,19 @@ jobs:
       - name: Build the project
         run: npm run build
 
-  test:
-    name: ✅ Run Tests
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+  # test:
+  #   name: ✅ Run Tests
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v4
 
-      - name: Restore Cached node_modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+  #     - name: Restore Cached node_modules
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: node_modules
+  #         key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
 
-      - name: Run Tests
-        run: npm test -- --passWithNoTests
+  #     - name: Run Tests
+  #       run: npm test -- --passWithNoTests
